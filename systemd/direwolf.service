@@ -1,0 +1,16 @@
+[Unit]
+Description=Direwolf Sound Card-based AX.25 TNC
+Wants=network-online.target
+After=network-online.target sound.target dw-switch.service
+
+[Service]
+Type=simple
+User=pi
+Group=pi
+WorkingDirectory=/home/pi/direwolf/build
+ExecStart=/usr/local/bin/direwolf -t 1 -a 600 -c /etc/direwolf.conf
+Restart=on-failure
+RestartSec=15s
+
+[Install]
+WantedBy=multi-user.target
